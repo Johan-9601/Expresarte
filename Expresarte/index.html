@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExpresArte — Tu idea, tu estilo.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FEFAF3;
+    --paper:#FFFFFF;
+    --ink:#1E2A44;
+    --ink-soft:#5B6478;
+    --pink:#F3A7BB;
+    --pink-deep:#E87F9C;
+    --mint:#78CDBB;
+    --mint-deep:#4FAF9B;
+    --yellow:#F5C56A;
+    --yellow-deep:#E9AC3B;
+    --purple:#B49BD9;
+    --purple-deep:#9779C9;
+    --radius-lg: 28px;
+    --radius-md: 18px;
+    --shadow-soft: 0 14px 30px -14px rgba(30,42,68,0.18);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Nunito', sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Baloo 2', sans-serif;
+    margin:0;
+    color:var(--ink);
+    line-height:1.15;
+  }
+  p{margin:0;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  ul{margin:0;padding:0;list-style:none;}
+  button{font-family:inherit;cursor:pointer;border:none;}
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+  section{padding:96px 0;}
+  @media (max-width:720px){
+    section{padding:64px 0;}
+    .wrap{padding:0 22px;}
+  }
+
+  /* ---------- decorative squiggle divider (echoes the logo underline) ---------- */
+  .squiggle{
+    width:120px;
+    height:14px;
+    margin:22px 0 0;
+  }
+  .squiggle.center{margin-left:auto;margin-right:auto;}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(254,250,243,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(30,42,68,0.06);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 0;
+  }
+  .nav-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Baloo 2';
+    font-weight:700;
+    font-size:1.3rem;
+  }
+  .nav-brand img{height:200px;width:200px;object-fit:contain;background:var(--paper);border-radius:100px;}
+  .nav-links{
+    display:flex;
+    gap:30px;
+    font-weight:700;
+    font-size:0.98rem;
+  }
+  .nav-links a{
+    position:relative;
+    padding:6px 2px;
+    color:var(--ink-soft);
+    transition:color .2s ease;
+  }
+  .nav-links a:hover{color:var(--pink-deep);}
+  .nav-cta{
+    background:var(--mint-deep);
+    color:#fff;
+    padding:11px 22px;
+    border-radius:100px;
+    font-weight:800;
+    font-size:0.95rem;
+    box-shadow:var(--shadow-soft);
+    transition:transform .2s ease;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{transform:translateY(-2px);}
+  .nav-toggle{display:none;}
+
+  @media (max-width:860px){
+    .nav-links{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:70px 0 40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    align-items:center;
+    gap:50px;
+  }
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;text-align:center;}
+    .hero-art{order:-1;}
+  }
+  .eyebrow-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--paper);
+    border:2px solid var(--pink);
+    color:var(--pink-deep);
+    font-weight:800;
+    font-size:0.85rem;
+    padding:7px 16px;
+    border-radius:100px;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 4.2vw, 3.4rem);
+    margin-top:18px;
+    font-weight:700;
+  }
+  .hero h1 .accent{color:var(--pink-deep);}
+  .hero-sub{
+    margin-top:20px;
+    font-size:1.12rem;
+    color:var(--ink-soft);
+    max-width:480px;
+  }
+  @media (max-width:900px){.hero-sub{margin-left:auto;margin-right:auto;}}
+  .hero-actions{
+    margin-top:32px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  @media (max-width:900px){.hero-actions{justify-content:center;}}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:15px 28px;
+    border-radius:100px;
+    font-weight:800;
+    font-size:1rem;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary{
+    background:var(--pink-deep);
+    color:#fff;
+    box-shadow:0 14px 26px -10px rgba(232,127,156,0.65);
+  }
+  .btn-primary:hover{transform:translateY(-3px);}
+  .btn-ghost{
+    background:transparent;
+    color:var(--ink);
+    border:2px solid var(--ink);
+  }
+  .btn-ghost:hover{background:var(--ink);color:#fff;}
+
+  .hero-art{
+    position:relative;
+    display:flex;
+    justify-content:center;
+  }
+  .hero-art .blob{
+    position:absolute;
+    width:340px;height:340px;
+    background:var(--yellow);
+    opacity:.35;
+    border-radius:62% 38% 55% 45% / 45% 55% 45% 55%;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    z-index:0;
+  }
+  .hero-art img{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:420px;
+  }
+
+  .hero-stats{
+    display:flex;
+    gap:34px;
+    margin-top:44px;
+    flex-wrap:wrap;
+  }
+  @media (max-width:900px){.hero-stats{justify-content:center;}}
+  .hero-stats div{min-width:120px;}
+  .hero-stats strong{
+    display:block;
+    font-family:'Baloo 2';
+    font-size:1.7rem;
+    color:var(--mint-deep);
+  }
+  .hero-stats span{
+    color:var(--ink-soft);
+    font-size:0.92rem;
+    font-weight:700;
+  }
+
+  /* ---------- section heading pattern ---------- */
+  .section-head{max-width:620px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-head h2{font-size:clamp(1.8rem,3vw,2.5rem);}
+  .section-head p{margin-top:14px;color:var(--ink-soft);font-size:1.05rem;}
+
+  /* ---------- products ---------- */
+  .products-grid{
+    margin-top:52px;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:22px;
+  }
+  @media (max-width:980px){.products-grid{grid-template-columns:repeat(3,1fr);}}
+  @media (max-width:620px){.products-grid{grid-template-columns:repeat(2,1fr);}}
+
+  .product-card{
+    background:var(--paper);
+    border-radius:var(--radius-lg);
+    padding:28px 20px;
+    text-align:center;
+    box-shadow:var(--shadow-soft);
+    transition:transform .25s ease;
+  }
+  .product-card:hover{transform:translateY(-6px) rotate(-1deg);}
+  .icon-badge{
+    width:78px;height:78px;
+    margin:0 auto 18px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .icon-badge svg{width:38px;height:38px;}
+  .product-card h3{font-size:1.08rem;margin-bottom:8px;}
+  .product-card p{font-size:0.92rem;color:var(--ink-soft);}
+
+  .bg-pink{background:#FCE4EB;}
+  .bg-mint{background:#DFF3EE;}
+  .bg-yellow{background:#FCEFD7;}
+  .bg-purple{background:#EEE7F9;}
+  .bg-peach{background:#FDECE0;}
+
+  /* ---------- gallery (real work, warm/wood aesthetic) ---------- */
+  .gallery{
+    background:linear-gradient(180deg, var(--cream) 0%, #FBF2E4 100%);
+  }
+  .gallery-grid{
+    margin-top:56px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:34px;
+  }
+  @media (max-width:860px){
+    .gallery-grid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto;}
+  }
+  .photo-card{
+    background:var(--paper);
+    padding:14px 14px 22px;
+    border-radius:14px;
+    box-shadow:0 20px 34px -18px rgba(30,42,68,0.3);
+  }
+  .photo-card:nth-child(odd){transform:rotate(-2deg);}
+  .photo-card:nth-child(even){transform:rotate(1.5deg);}
+  .photo-card:hover{transform:rotate(0deg) translateY(-4px);}
+  .photo-card{transition:transform .3s ease;}
+  .photo-frame{
+    border-radius:8px;
+    overflow:hidden;
+    aspect-ratio:4/5;
+  }
+  .photo-frame img{width:100%;height:100%;object-fit:cover;}
+  .photo-caption{
+    margin-top:14px;
+    text-align:center;
+    font-family:'Baloo 2';
+    font-weight:600;
+    font-size:1rem;
+    color:var(--ink);
+  }
+  .photo-caption span{
+    display:block;
+    font-family:'Nunito';
+    font-weight:700;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+
+  /* ---------- steps ---------- */
+  .steps{
+    margin-top:56px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:26px;
+  }
+  @media (max-width:900px){.steps{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.steps{grid-template-columns:1fr;}}
+  .step-card{
+    position:relative;
+    padding:30px 22px 24px;
+    background:var(--paper);
+    border-radius:var(--radius-md);
+    box-shadow:var(--shadow-soft);
+  }
+  .step-num{
+    font-family:'Baloo 2';
+    font-size:1.4rem;
+    font-weight:700;
+    color:#fff;
+    width:42px;height:42px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:16px;
+  }
+  .step-card h4{font-size:1.05rem;margin-bottom:8px;}
+  .step-card p{font-size:0.92rem;color:var(--ink-soft);}
+
+  /* ---------- personalization band ---------- */
+  .band{
+    background:var(--ink);
+    color:#fff;
+    border-radius:32px;
+    padding:56px 44px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:40px;
+    align-items:center;
+  }
+  @media (max-width:860px){
+    .band{grid-template-columns:1fr;text-align:center;padding:44px 26px;}
+  }
+  .band h2{color:#fff;font-size:clamp(1.6rem,3vw,2.1rem);}
+  .band p{color:#C9CFDD;margin-top:14px;font-size:1.02rem;}
+  .band-chips{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:26px;
+  }
+  @media (max-width:860px){.band-chips{justify-content:center;}}
+  .band-chips span{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.18);
+    padding:9px 16px;
+    border-radius:100px;
+    font-size:0.88rem;
+    font-weight:700;
+  }
+  .band-visual{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+  }
+  .band-visual .mini{
+    background:rgba(255,255,255,0.06);
+    border-radius:16px;
+    padding:22px 14px;
+    text-align:center;
+  }
+  .band-visual .mini strong{
+    display:block;
+    font-family:'Baloo 2';
+    font-size:1.5rem;
+  }
+  .band-visual .mini span{font-size:0.82rem;color:#B7BEcf;}
+
+  /* ---------- contact ---------- */
+  .contact{
+    background:var(--paper);
+    border-radius:32px;
+    margin:0 auto;
+    padding:56px 44px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    box-shadow:var(--shadow-soft);
+  }
+  @media (max-width:860px){
+    .contact{grid-template-columns:1fr;padding:40px 26px;}
+  }
+  .contact-list{margin-top:26px;display:flex;flex-direction:column;gap:16px;}
+  .contact-item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .contact-item .ic{
+    width:46px;height:46px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .contact-item h4{font-size:1rem;}
+  .contact-item p{font-size:0.9rem;color:var(--ink-soft);}
+  .form-field{margin-bottom:16px;}
+  .form-field label{
+    display:block;
+    font-weight:800;
+    font-size:0.88rem;
+    margin-bottom:6px;
+  }
+  .form-field input,.form-field textarea,.form-field select{
+    width:100%;
+    padding:13px 16px;
+    border-radius:12px;
+    border:2px solid #ECE7DC;
+    background:var(--cream);
+    font-family:inherit;
+    font-size:0.95rem;
+    color:var(--ink);
+  }
+  .form-field input:focus,.form-field textarea:focus,.form-field select:focus{
+    outline:none;
+    border-color:var(--pink);
+  }
+  .form-submit{
+    width:100%;
+    background:var(--mint-deep);
+    color:#fff;
+    padding:15px;
+    border-radius:100px;
+    font-weight:800;
+    font-size:1rem;
+    box-shadow:var(--shadow-soft);
+    transition:transform .2s ease;
+  }
+  .form-submit:hover{transform:translateY(-2px);}
+
+  /* ---------- footer ---------- */
+  footer{
+    padding:40px 0 30px;
+  }
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    border-top:1px solid rgba(30,42,68,0.1);
+    padding-top:28px;
+  }
+  .footer-brand{display:flex;align-items:center;gap:10px;font-family:'Baloo 2';font-weight:700;}
+  .footer-brand img{height:34px;width:34px;}
+  .footer-social{display:flex;gap:14px;}
+  .footer-social a{
+    width:38px;height:38px;
+    border-radius:50%;
+    background:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:var(--shadow-soft);
+  }
+  .footer-copy{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:0.85rem;
+    margin-top:22px;
+  }
+
+  /* ---------- floating whatsapp ---------- */
+  .float-wa{
+    position:fixed;
+    bottom:26px;
+    right:26px;
+    background:#4FAF9B;
+    color:#fff;
+    width:58px;height:58px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 14px 26px -8px rgba(79,175,155,0.6);
+    z-index:60;
+    transition:transform .2s ease;
+  }
+  .float-wa:hover{transform:scale(1.08);}
+  .float-wa svg{width:28px;height:28px;}
+
+  ::selection{background:var(--pink);color:var(--ink);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="nav-brand">
+      <img src="logo.png" alt="ExpresArte">
+      <span>El Arte de expresarse</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#productos">Productos</a>
+      <a href="#galeria">Galería</a>
+      <a href="#como-pedir">Cómo pedir</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a href="#contacto" class="nav-cta">Pedir ahora</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow-chip">🦎 Hecho a mano, pensado por ti</span>
+        <h1>Tu idea cabe en una <span class="accent">taza</span>, una <span class="accent">camisa</span> o donde tú quieras.</h1>
+        <p class="hero-sub">Sublimamos y estampamos en DTF piezas únicas: jarras, camisas, botellas, bolsas y gorras. Tú traes la idea, nosotros la volvemos algo que puedes tocar.</p>
+        <div class="hero-actions">
+          <a href="#productos" class="btn btn-primary">Ver productos</a>
+          <a href="#contacto" class="btn btn-ghost">Cotizar mi diseño</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <strong>+300</strong>
+            <span>piezas entregadas</span>
+          </div>
+          <div>
+            <strong>5</strong>
+            <span>tipos de producto</span>
+          </div>
+          <div>
+            <strong>100%</strong>
+            <span>diseños personalizados</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="blob"></div>
+        <img src="logo.png" alt="Mascota ExpresArte, un camaleón con pinceles">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCTOS ============ -->
+  <section id="productos">
+    <div class="wrap">
+      <div class="section-head center">
+        <h2>¿Qué podemos personalizar por ti?</h2>
+        <p>Cada producto se sublima o estampa bajo pedido, con el diseño, texto o foto que nos compartas.</p>
+      </div>
+
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="icon-badge bg-pink">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E87F9C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 4 L4 7 L6.5 10 L8 9 V20 H16 V9 L17.5 10 L20 7 L16 4 C16 5.6 14.2 7 12 7 C9.8 7 8 5.6 8 4Z"/>
+              <path d="M10.5 12.5 L13.2 15.2 L16.5 11.5" />
+            </svg>
+          </div>
+          <h3>Camisas DTF</h3>
+          <p>Estampado full color, suave al tacto y resistente al lavado.</p>
+        </div>
+
+        <div class="product-card">
+          <div class="icon-badge bg-mint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4FAF9B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="6" width="12" height="14" rx="1.5"/>
+              <path d="M16 9 H19 A2 2 0 0 1 21 11 V14 A2 2 0 0 1 19 16 H16"/>
+              <path d="M8 11.5 L9.6 13.5 L12.5 9.5"/>
+            </svg>
+          </div>
+          <h3>Jarras cerveceras</h3>
+          <p>Vidrio sublimado con tu equipo, banda o frase favorita.</p>
+        </div>
+
+        <div class="product-card">
+          <div class="icon-badge bg-yellow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E9AC3B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 3 H14 V6 L15.5 8 V19 A2 2 0 0 1 13.5 21 H10.5 A2 2 0 0 1 8.5 19 V8 L10 6 Z"/>
+              <path d="M8.5 12.5 L15.5 12.5"/>
+              <path d="M11 15.5 L12.6 17.5 L15 13.8" />
+            </svg>
+          </div>
+          <h3>Botellas y termos</h3>
+          <p>Para el gym, la oficina o de regalo, con acabado duradero.</p>
+        </div>
+
+        <div class="product-card">
+          <div class="icon-badge bg-purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#9779C9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 9 V6.5 A4 4 0 0 1 16 6.5 V9"/>
+              <rect x="5" y="9" width="14" height="12" rx="1.5"/>
+              <path d="M9.5 13.5 L11.3 15.5 L14.5 11.5" />
+            </svg>
+          </div>
+          <h3>Bolsas de tela</h3>
+          <p>Ecológicas y con estilo, ideales para regalar o vender.</p>
+        </div>
+
+        <div class="product-card">
+          <div class="icon-badge bg-peach">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E8965E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 15 C4 10 7.5 7 12 7 C16.5 7 20 10 20 15"/>
+              <path d="M4 15 H20 V17 A2 2 0 0 1 18 19 H6 A2 2 0 0 1 4 17 Z"/>
+              <path d="M12 7 V4.5" />
+              <path d="M9.5 12.5 L11 14 L13.7 10.8" />
+            </svg>
+          </div>
+          <h3>Gorras</h3>
+          <p>Bordado o sublimado frontal para lucir tu marca o equipo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GALERIA ============ -->
+  <section id="galeria" class="gallery">
+    <div class="wrap">
+      <div class="section-head center">
+        <h2>Algunos trabajos que ya salieron de taller</h2>
+        <p>Jarras sublimadas para clientes que querían llevar su banda o equipo favorito a la mesa.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="photo-card">
+          <div class="photo-frame">
+            <img src="jarra-iron-maiden.jpg" alt="Jarra cervecera sublimada con el logo de Iron Maiden">
+          </div>
+          <p class="photo-caption">Jarra Iron Maiden <span>Edición banda de rock</span></p>
+        </div>
+        <div class="photo-card">
+          <div class="photo-frame">
+            <img src="jarra-linkin-park.jpg" alt="Jarra cervecera sublimada con el logo de Linkin Park">
+          </div>
+          <p class="photo-caption">Jarra Linkin Park <span>Edición banda de rock</span></p>
+        </div>
+        <div class="photo-card">
+          <div class="photo-frame">
+            <img src="jarra-lda.jpg" alt="Jarra cervecera sublimada con el escudo de LD Alajuelense">
+          </div>
+          <p class="photo-caption">Jarra LDA <span>Edición equipo favorito</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMO PEDIR ============ -->
+  <section id="como-pedir">
+    <div class="wrap">
+      <div class="section-head center">
+        <h2>De tu idea a tu pedido, en 4 pasos</h2>
+        <p>Así de simple es personalizar algo con nosotros, sin vueltas.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step-card">
+          <div class="step-num" style="background:var(--pink-deep)">1</div>
+          <h4>Cuéntanos tu idea</h4>
+          <p>Escríbenos el producto, el diseño, foto o texto que quieres plasmar.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num" style="background:var(--mint-deep)">2</div>
+          <h4>Te mostramos cómo queda</h4>
+          <p>Preparamos una vista previa del diseño sobre el producto elegido.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num" style="background:var(--yellow-deep)">3</div>
+          <h4>Confirmas y separamos</h4>
+          <p>Apartas tu pedido con un anticipo y comenzamos a producir.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num" style="background:var(--purple-deep)">4</div>
+          <h4>Recibes tu pieza</h4>
+          <p>Coordinamos entrega o envío, lista para usar o regalar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BANDA PERSONALIZACION ============ -->
+  <section>
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <h2>Cualquier idea, la volvemos parte de tu día a día.</h2>
+          <p>Equipos deportivos, bandas favoritas, negocios, cumpleaños o detalles para bodas: si lo puedes describir, probablemente lo podamos imprimir.</p>
+          <div class="band-chips">
+            <span>Diseños propios</span>
+            <span>Fotos personales</span>
+            <span>Logos de equipos</span>
+            <span>Pedidos por mayor</span>
+          </div>
+        </div>
+        <div class="band-visual">
+          <div class="mini"><strong>1 a 1</strong><span>piezas unitarias o por lote</span></div>
+          <div class="mini"><strong>Full color</strong><span>sin límite de colores</span></div>
+          <div class="mini"><strong>Foto o texto</strong><span>tú decides el diseño</span></div>
+          <div class="mini"><strong>Entrega local</strong><span>y coordinación de envíos</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTO ============ -->
+  <section id="contacto">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <h2>Hagamos tu pedido</h2>
+          <p style="margin-top:12px;color:var(--ink-soft);">Escríbenos con tu idea y te respondemos con opciones y precio.</p>
+
+          <div class="contact-list">
+            <div class="contact-item">
+              <div class="ic bg-mint">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#4FAF9B"><path d="M20.5 3.5a11 11 0 0 0-15.9 15.1L3 21l2.5-1.5A11 11 0 1 0 20.5 3.5Zm-8.4 16a9 9 0 0 1-4.6-1.3l-.3-.2-2.7.8.8-2.6-.2-.3A9 9 0 1 1 12.1 19.5Zm5-6.7c-.3-.1-1.6-.8-1.8-.9s-.4-.1-.6.1-.7.9-.9 1-.3.2-.6.1a7.3 7.3 0 0 1-3.6-3.1c-.3-.5.3-.5.7-1.5a.5.5 0 0 0 0-.5c-.1-.1-.6-1.4-.8-2s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-1 2.3c0 1.3 1 2.6 1.1 2.8s2 3 4.8 4.3c2 .8 2 .5 2.3.5s1.7-.7 2-1.4.3-1.3.2-1.4-.2-.2-.5-.3Z"/></svg>
+              </div>
+              <div>
+                <h4>WhatsApp</h4>
+                <p>+506 6067-6282</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ic bg-purple">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9779C9" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+              </div>
+              <div>
+                <h4>Instagram</h4>
+                <p>@Express_Arte_</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ic bg-pink">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E87F9C" stroke-width="1.7"><path d="M3 6.5 12 13 21 6.5"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
+              </div>
+              <div>
+                <h4>Correo</h4>
+                <p>info@expresarte.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form onsubmit="event.preventDefault(); alert('¡Gracias! Te contactaremos pronto para armar tu pedido.');">
+          <div class="form-field">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" placeholder="¿Cómo te llamas?" required>
+          </div>
+          <div class="form-field">
+            <label for="producto">Producto</label>
+            <select id="producto">
+              <option>Camisa DTF</option>
+              <option>Jarra cervecera</option>
+              <option>Botella o termo</option>
+              <option>Bolsa de tela</option>
+              <option>Gorra</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="mensaje">Cuéntanos tu idea</label>
+            <textarea id="mensaje" rows="4" placeholder="Diseño, foto, frase, cantidad..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Enviar mi idea</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="logo.png" alt="ExpresArte">
+        <span>ExpresArte</span>
+      </div>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E2A44" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        </a>
+        <a href="#" aria-label="WhatsApp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1E2A44"><path d="M20.5 3.5a11 11 0 0 0-15.9 15.1L3 21l2.5-1.5A11 11 0 1 0 20.5 3.5Zm-8.4 16a9 9 0 0 1-4.6-1.3l-.3-.2-2.7.8.8-2.6-.2-.3A9 9 0 1 1 12.1 19.5Z"/></svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1E2A44"><path d="M14 9h2V6h-2c-1.7 0-3 1.3-3 3v2H9v3h2v6h3v-6h2.2l.8-3H14V9.3c0-.2.1-.3.3-.3Z"/></svg>
+        </a>
+      </div>
+    </div>
+    <p class="footer-copy">Personalizamos • Creamos • Inspiramos — © 2026 ExpresArte. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<a href="#contacto" class="float-wa" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M20.5 3.5a11 11 0 0 0-15.9 15.1L3 21l2.5-1.5A11 11 0 1 0 20.5 3.5Zm-8.4 16a9 9 0 0 1-4.6-1.3l-.3-.2-2.7.8.8-2.6-.2-.3A9 9 0 1 1 12.1 19.5Zm5-6.7c-.3-.1-1.6-.8-1.8-.9s-.4-.1-.6.1-.7.9-.9 1-.3.2-.6.1a7.3 7.3 0 0 1-3.6-3.1c-.3-.5.3-.5.7-1.5a.5.5 0 0 0 0-.5c-.1-.1-.6-1.4-.8-2s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-1 2.3c0 1.3 1 2.6 1.1 2.8s2 3 4.8 4.3c2 .8 2 .5 2.3.5s1.7-.7 2-1.4.3-1.3.2-1.4-.2-.2-.5-.3Z"/></svg>
+</a>
+
+</body>
+</html>
